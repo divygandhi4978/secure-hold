@@ -38,7 +38,7 @@ export default function RegistrationForm(props) {
     e.preventDefault();
 
     console.log(user, formData);
-    await fetch(`http://localhost:3000/crud/update`, {
+    await fetch(`https://secure-hold.onrender.com/crud/update`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

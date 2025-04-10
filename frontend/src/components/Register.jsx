@@ -35,7 +35,7 @@ export default function LoginForm({ className, ...props }) {
     } else {
       setError("");
 
-      let r = await fetch(`http://localhost:3000/auth/register`, {
+      let r = await fetch(`https://secure-hold.onrender.com/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export default function LoginForm({ className, ...props }) {
           navigate("/login");
         }, 3000);
       } else {
-        await fetch("http://localhost:3000/logs/setLog", {
+        await fetch("https://secure-hold.onrender.com/logs/setLog", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ userId: response.userId }),

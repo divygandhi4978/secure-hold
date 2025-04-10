@@ -45,7 +45,7 @@ export default function RegistrationForm(props) {
       notes: formData.notes,
       tags: formData.tags,
     };
-    let r = await fetch(`http://localhost:3000/crud/add`, {
+    let r = await fetch(`https://secure-hold.onrender.com/crud/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

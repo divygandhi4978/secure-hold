@@ -19,7 +19,7 @@ export default function TableDemo(props) {
     const id = userInfo.userId;
 
     console.log(id);
-    let r = await fetch(`http://localhost:3000/crud/find-all?id=${id}`, {
+    let r = await fetch(`https://secure-hold.onrender.com/crud/find-all?id=${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

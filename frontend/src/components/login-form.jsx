@@ -40,7 +40,7 @@ export function LoginForm({ className, ...props }) {
 
     //Verify user details
     console.log(form);
-    let res = await fetch("http://localhost:3000/auth/check", {
+    let res = await fetch("https://secure-hold.onrender.com/auth/check", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
@@ -54,7 +54,7 @@ export function LoginForm({ className, ...props }) {
     if (response.length != 0) {
       const getLog = async () => {
         const data = await fetch(
-          `http://localhost:3000/logs/getLog?id=${userId()}`,
+          `https://secure-hold.onrender.com/logs/getLog?id=${userId()}`,
           {
             method: "GET",
           }
@@ -66,7 +66,7 @@ export function LoginForm({ className, ...props }) {
 
       await getLog();
 
-      await fetch("http://localhost:3000/logs/setLog", {
+      await fetch("https://secure-hold.onrender.com/logs/setLog", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: userId() }),
