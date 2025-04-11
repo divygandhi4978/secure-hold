@@ -10,9 +10,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
-import {  useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
-export function LoginForm({ className, ...props }) {
+export function LoginForm(props) {
+  const { toggleLoading } = props;
+
   document.title = "Login Page";
   const navigate = useNavigate();
 
@@ -22,9 +24,8 @@ export function LoginForm({ className, ...props }) {
       navigate("/admin");
     }
     setCheckingSession(false);
-
   }, []);
-  
+
   const [checkingSession, setCheckingSession] = useState(true);
 
   const [form, setForm] = useState({ email: "", password: "" });
@@ -40,15 +41,17 @@ export function LoginForm({ className, ...props }) {
 
     //Verify user details
     console.log(form);
+
+    toggleLoading()
     let res = await fetch("https://secure-hold.onrender.com/auth/check", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
+    toggleLoading()
 
     let response = await res.json();
     console.log(response);
-
 
     //Update user log if user exists
     if (response.length != 0) {
@@ -90,7 +93,6 @@ export function LoginForm({ className, ...props }) {
   if (checkingSession) return null;
   return (
     <>
-
       {error == "wrongPass" && (
         <div className="mt-20">
           <Card>

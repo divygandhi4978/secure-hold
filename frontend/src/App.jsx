@@ -14,12 +14,12 @@ import { useEffect, useState } from "react";
 function App() {
   const [nav, setNav] = useState(1);
 
-  useEffect(()=>{
-    window.addEventListener("unload",()=>{
-      sessionStorage.clear()
-    })
-  },[])
- 
+  useEffect(() => {
+    window.addEventListener("unload", () => {
+      sessionStorage.clear();
+    });
+  }, []);
+
   return (
     <div>
       <BrowserRouter>
@@ -36,7 +36,6 @@ function App() {
           <Route path="/logged-Out" element={<LogOut />} />
         </Routes>
       </BrowserRouter>
-
     </div>
   );
 }
