@@ -27,6 +27,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "input-otp": "^1.4.2",
+    "ldrs": "^1.1.6",
     "lucide-react": "^0.487.0",
     "motion": "^12.6.3",
     "react": "^19.0.0",

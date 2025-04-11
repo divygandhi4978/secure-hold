@@ -11,11 +11,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loader from './Loader'
 
 export default function LoginForm({ className, ...props }) {
   document.title = "SignUp Page";
 
   // const toggleLoading = props.toggleLoading;
+
+  const [loading, isLoading] = useState(0);
+
+  const toggleLoading = () => {
+    if (loading) {
+      console.log(loading);
+      isLoading(0);
+    } else {
+      console.log(loading);
+      isLoading(1);
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -36,7 +49,8 @@ export default function LoginForm({ className, ...props }) {
       setError("err");
     } else {
       setError("");
-      // toggleLoading(1);
+
+      toggleLoading();
       let r = await fetch(`${import.meta.env.VITE_BACKEND}/auth/register`, {
         method: "POST",
         headers: {
@@ -49,16 +63,16 @@ export default function LoginForm({ className, ...props }) {
           password: form.pass,
         }),
       });
-      // toggleLoading(0);
-      
+
       const response = await r.json();
-      
+      toggleLoading();
+
       console.log(response);
-      
+
       //Update user log if user exists
       if (response.length === 0) {
         setError("registered");
-        
+
         setTimeout(() => {
           navigate("/login");
         }, 3000);
@@ -69,12 +83,12 @@ export default function LoginForm({ className, ...props }) {
           body: JSON.stringify({ userId: response.userId }),
         });
         console.log("log updated");
-        
+
         //setUser session in local storage
         console.log("session updated");
         //Have to store obj as string
         sessionStorage.setItem("user", JSON.stringify(response));
-        
+
         console.log("in else");
 
         navigate("/admin");
@@ -94,7 +108,9 @@ export default function LoginForm({ className, ...props }) {
 
   return (
     <>
-      {error == "registered" && (
+      {loading && <Loader className="sm:mt-28" />}
+
+      {!loading && error == "registered" && (
         <div className="mt-10">
           <Card>
             <CardHeader>
@@ -106,7 +122,7 @@ export default function LoginForm({ className, ...props }) {
         </div>
       )}
 
-      {error != "registered" && (
+      {!loading && error != "registered" && (
         <div className={cn("flex flex-col gap-", className)} {...props}>
           <div className="flex justify-center sm:mt-24 max-sm:mt-20 mb-10">
             <div>

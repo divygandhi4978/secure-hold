@@ -20,39 +20,16 @@ function App() {
     });
   }, []);
 
-  const [loading, isLoading] = useState(0);
-
-  const toggleLoading = () => {
-    if (loading) {
-      console.log(loading)
-      isLoading(0);
-    } else {
-      console.log(loading)
-      isLoading(1);
-    }
-  };
-
-  return loading ? (
-    <h1>Loading</h1>
-  ) : (
+  return (
     <div>
       <BrowserRouter>
         {nav == 1 && <Navigation className="sticky top-4 z-5" />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<PageNotFound />} />
-          <Route
-            path="/login"
-            element={<LoginForm toggleLoading={toggleLoading} />}
-          />
-          <Route
-            path="/admin"
-            element={<Admin setNav={setNav} t/>}
-          />
-          <Route
-            path="/signup"
-            element={<Register toggleLoading={toggleLoading} />}
-          />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/admin" element={<Admin setNav={setNav} t />} />
+          <Route path="/signup" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="/faqs" element={<Body />} />
           <Route path="/features" element={<Features />} />

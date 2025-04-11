@@ -11,9 +11,20 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Loader from "./Loader";
 
 export function LoginForm({ className, ...props }) {
-  const toggleLoading = props.toggleLoading;
+  const [loading, isLoading] = useState(0);
+
+  const toggleLoading = () => {
+    if (loading) {
+      console.log(loading);
+      isLoading(0);
+    } else {
+      console.log(loading);
+      isLoading(1);
+    }
+  };
 
   document.title = "Login Page";
   const navigate = useNavigate();
@@ -48,11 +59,11 @@ export function LoginForm({ className, ...props }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
-    
+
     let response = await res.json();
     console.log(response);
     toggleLoading(0);
-    
+
     //Update user log if user exists
     if (response.length != 0) {
       const getLog = async () => {
@@ -68,9 +79,9 @@ export function LoginForm({ className, ...props }) {
         console.log(res);
         sessionStorage.setItem("lastLog", JSON.stringify(res));
       };
-      
+
       await getLog();
-      
+
       toggleLoading(1);
       await fetch(`${import.meta.env.VITE_BACKEND}/logs/setLog`, {
         method: "POST",
@@ -83,7 +94,7 @@ export function LoginForm({ className, ...props }) {
       //Have to store obj as string
       sessionStorage.setItem("user", JSON.stringify(response));
       toggleLoading(0);
-      
+
       navigate("/admin");
     } else {
       setError("wrongPass");
@@ -97,7 +108,8 @@ export function LoginForm({ className, ...props }) {
   if (checkingSession) return null;
   return (
     <>
-      {error == "wrongPass" && (
+    {loading && <Loader className='sm:mt-28'/> }
+      { !loading && error == "wrongPass" && (
         <div className="mt-20">
           <Card>
             <CardHeader>
@@ -111,7 +123,7 @@ export function LoginForm({ className, ...props }) {
         </div>
       )}
 
-      {error != "wrongPass" && (
+      {!loading && error != "wrongPass" && (
         <div className={cn("flex flex-col gap-", className)} {...props}>
           <div className="w-full flex justify-center sm:mt-24 max-sm:mt-20">
             <div>

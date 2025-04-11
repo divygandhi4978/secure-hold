@@ -3,12 +3,11 @@ import Drawer from "../adminComponents/Drawer";
 import { useEffect, useState } from "react";
 
 export default function TableDemo(props) {
-
-  // const toggleLoading= props.toggleLoading
+  
 
   const [logged, setLogged] = useState(0);
   useEffect(() => {
-    console.log('Data tabel')
+    console.log("Data tabel");
     if (sessionStorage.user) {
       getPasswords();
       setLogged(1);
@@ -23,9 +22,8 @@ export default function TableDemo(props) {
     const id = userInfo.userId;
 
     console.log(id);
-    
-    console.log(1,'Load');
-    // toggleLoading(1)
+
+    console.log(1, "Load");
     let r = await fetch(
       `${import.meta.env.VITE_BACKEND}/crud/find-all?id=${id}`,
       {
@@ -35,11 +33,9 @@ export default function TableDemo(props) {
         },
       }
     );
-    // console.log(0,'Load');
-    
+
     const data = await r.json();
     console.log(data);
-    // toggleLoading(0)
 
     setInitData(data);
   };
@@ -47,13 +43,14 @@ export default function TableDemo(props) {
   const { activePage } = props;
   return (
     <>
+
       {!logged && (
         <h1 className="text-xl p-5 font-semibold text-start">
           Please Login and get into admin page.
         </h1>
       )}
 
-      {logged == 1 && (
+      { logged == 1 && (
         <Table>
           {init_data.length === 0 && (
             <p className="text-xl p-5 font-semibold text-start">
