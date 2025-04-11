@@ -3,11 +3,10 @@ const router = express.Router();
 const Data = require("../models/Data");
 var cors = require("cors");
 
-//In each route must add below to convert stringify body to json
 router.use(express.json());
 router.use(cors());
 
-//Add data in db
+//@desc Add new data
 router.post("/add", async function (req, res) {
   const { userId, site, username, password } = req.body;
 
@@ -29,6 +28,7 @@ router.post("/add", async function (req, res) {
   }
 });
 
+// @desc update data
 router.post("/update", async function (req, res) {
   const oldJson = req.body.oldJson;
   const newJson = { ...req.body.newJson, date: Date.now() };
@@ -36,10 +36,11 @@ router.post("/update", async function (req, res) {
   await Data.updateOne(oldJson, { $set: { ...newJson } });
   console.log("oldJson:", oldJson);
   console.log("newJson:", newJson);
-  
+
   res.send("Update Done");
 });
 
+// @desc delete data
 router.delete("/delete", async function (req, res) {
   const filter = req.body;
 
@@ -47,11 +48,13 @@ router.delete("/delete", async function (req, res) {
   res.send("Deleted");
 });
 
+// @desc find all the data available for user
 router.get("/find-all", async function (req, res) {
   const response = await Data.find({ userId: req.query.id });
   res.json(response);
 });
 
+// @desc find a single data
 router.get("/findone-site", async function (req, res) {
   const response = await Data.find({
     userId: req.body.id,

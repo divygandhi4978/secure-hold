@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
-import {  useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export function LoginForm({ className, ...props }) {
   document.title = "Login Page";
@@ -22,9 +22,8 @@ export function LoginForm({ className, ...props }) {
       navigate("/admin");
     }
     setCheckingSession(false);
-
   }, []);
-  
+
   const [checkingSession, setCheckingSession] = useState(true);
 
   const [form, setForm] = useState({ email: "", password: "" });
@@ -40,7 +39,7 @@ export function LoginForm({ className, ...props }) {
 
     //Verify user details
     console.log(form);
-    let res = await fetch("https://secure-hold.onrender.com/auth/check", {
+    let res = await fetch(`${import.meta.env.VITE_BACKEND}/auth/check`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
@@ -49,12 +48,11 @@ export function LoginForm({ className, ...props }) {
     let response = await res.json();
     console.log(response);
 
-
     //Update user log if user exists
     if (response.length != 0) {
       const getLog = async () => {
         const data = await fetch(
-          `https://secure-hold.onrender.com/logs/getLog?id=${userId()}`,
+          `${import.meta.env.VITE_BACKEND}/logs/getLog?id=${userId()}`,
           {
             method: "GET",
           }
@@ -66,7 +64,7 @@ export function LoginForm({ className, ...props }) {
 
       await getLog();
 
-      await fetch("https://secure-hold.onrender.com/logs/setLog", {
+      await fetch(`${import.meta.env.VITE_BACKEND}/logs/setLog`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: userId() }),
@@ -90,7 +88,6 @@ export function LoginForm({ className, ...props }) {
   if (checkingSession) return null;
   return (
     <>
-
       {error == "wrongPass" && (
         <div className="mt-20">
           <Card>

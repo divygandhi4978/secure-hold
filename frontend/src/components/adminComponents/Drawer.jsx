@@ -51,7 +51,8 @@ export default function DrawerDemo(props) {
     document.title = `Confirm Delete?`;
     if (confirm("Confirm ?")) {
       console.log(user);
-      await fetch(`https://secure-hold.onrender.com/crud/delete`, {
+      await fetch(`${import.meta.env.VITE_BACKEND
+      }/crud/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

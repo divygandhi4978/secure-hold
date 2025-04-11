@@ -19,12 +19,15 @@ export default function TableDemo(props) {
     const id = userInfo.userId;
 
     console.log(id);
-    let r = await fetch(`https://secure-hold.onrender.com/crud/find-all?id=${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    let r = await fetch(
+      `${import.meta.env.VITE_BACKEND}/crud/find-all?id=${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const data = await r.json();
     console.log(data);
@@ -62,7 +65,11 @@ export default function TableDemo(props) {
                     <p className="text-gray-500">{element.username}</p>
                   </div>
                 </TableCell>
-                <Drawer activePage={activePage} userData={element} getPasswords={getPasswords}/>
+                <Drawer
+                  activePage={activePage}
+                  userData={element}
+                  getPasswords={getPasswords}
+                />
               </TableRow>
             ))}
           </TableBody>
