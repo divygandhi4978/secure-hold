@@ -15,6 +15,8 @@ import { useNavigate } from "react-router-dom";
 export default function LoginForm({ className, ...props }) {
   document.title = "SignUp Page";
 
+  // const toggleLoading = props.toggleLoading;
+
   const navigate = useNavigate();
 
   const [error, setError] = useState("");
@@ -34,7 +36,7 @@ export default function LoginForm({ className, ...props }) {
       setError("err");
     } else {
       setError("");
-
+      // toggleLoading(1);
       let r = await fetch(`${import.meta.env.VITE_BACKEND}/auth/register`, {
         method: "POST",
         headers: {
@@ -47,15 +49,16 @@ export default function LoginForm({ className, ...props }) {
           password: form.pass,
         }),
       });
-
+      // toggleLoading(0);
+      
       const response = await r.json();
-
+      
       console.log(response);
-
+      
       //Update user log if user exists
       if (response.length === 0) {
         setError("registered");
-
+        
         setTimeout(() => {
           navigate("/login");
         }, 3000);
@@ -66,12 +69,12 @@ export default function LoginForm({ className, ...props }) {
           body: JSON.stringify({ userId: response.userId }),
         });
         console.log("log updated");
-
+        
         //setUser session in local storage
         console.log("session updated");
         //Have to store obj as string
         sessionStorage.setItem("user", JSON.stringify(response));
-
+        
         console.log("in else");
 
         navigate("/admin");

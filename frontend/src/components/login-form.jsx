@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export function LoginForm({ className, ...props }) {
+  const toggleLoading = props.toggleLoading;
+
   document.title = "Login Page";
   const navigate = useNavigate();
 
@@ -39,18 +41,22 @@ export function LoginForm({ className, ...props }) {
 
     //Verify user details
     console.log(form);
+
+    toggleLoading(1);
     let res = await fetch(`${import.meta.env.VITE_BACKEND}/auth/check`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
-
+    
     let response = await res.json();
     console.log(response);
-
+    toggleLoading(0);
+    
     //Update user log if user exists
     if (response.length != 0) {
       const getLog = async () => {
+        toggleLoading(1);
         const data = await fetch(
           `${import.meta.env.VITE_BACKEND}/logs/getLog?id=${userId()}`,
           {
@@ -58,12 +64,14 @@ export function LoginForm({ className, ...props }) {
           }
         );
         const res = await data.json();
+        toggleLoading(0);
         console.log(res);
         sessionStorage.setItem("lastLog", JSON.stringify(res));
       };
-
+      
       await getLog();
-
+      
+      toggleLoading(1);
       await fetch(`${import.meta.env.VITE_BACKEND}/logs/setLog`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -74,7 +82,8 @@ export function LoginForm({ className, ...props }) {
       console.log("session updated");
       //Have to store obj as string
       sessionStorage.setItem("user", JSON.stringify(response));
-
+      toggleLoading(0);
+      
       navigate("/admin");
     } else {
       setError("wrongPass");

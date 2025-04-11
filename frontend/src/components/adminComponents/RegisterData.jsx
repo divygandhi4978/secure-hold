@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 
 export default function RegistrationForm(props) {
+  // const toggleLoading = props.toggleLoading;
   const { activePage } = props;
   const [formData, setFormData] = useState({
     userId: "",
@@ -45,15 +46,17 @@ export default function RegistrationForm(props) {
       notes: formData.notes,
       tags: formData.tags,
     };
-    let r = await fetch(`${import.meta.env.VITE_BACKEND
-    }/crud/add`, {
+
+    // toggleLoading(1)
+    let r = await fetch(`${import.meta.env.VITE_BACKEND}/crud/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(mixedJson),
     });
-
+    // toggleLoading(0)
+    
     console.log("done");
 
     activePage(0);

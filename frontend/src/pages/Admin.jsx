@@ -11,6 +11,7 @@ import RegisterData from "../components/adminComponents/RegisterData";
 import { useNavigate } from "react-router-dom";
 
 export default function Admin(props) {
+  // const toggleLoading = props.toggleLoading;
   const { setNav } = props;
 
   const navigate = useNavigate();
@@ -61,10 +62,21 @@ export default function Admin(props) {
         <div className="flex justify-center items-center w-full">
           {active == 0 && (
             <div className="bg-zinc-100  w-full rounded-sm flex items-center">
-              <DataTabel activePage={activePage} className="sm:p-16 mt-10" />
+              <DataTabel
+                key="show-data"
+                activePage={activePage}
+                // toggleLoading={toggleLoading}
+                className="sm:p-16 mt-10"
+              />
             </div>
           )}
-          {active == 1 && <RegisterData activePage={activePage} />}
+          {active == 1 && (
+            <RegisterData
+              activePage={activePage}
+              key="new-data"
+              // toggleLoading={toggleLoading}
+            />
+          )}
         </div>
       </SidebarInset>
     </SidebarProvider>
