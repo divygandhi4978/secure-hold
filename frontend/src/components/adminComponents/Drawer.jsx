@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Copy,
@@ -50,9 +50,7 @@ export default function DrawerDemo(props) {
   const deleteEvent = async () => {
     document.title = `Confirm Delete?`;
     if (confirm("Confirm ?")) {
-      console.log(user);
-      await fetch(`${import.meta.env.VITE_BACKEND
-      }/crud/delete`, {
+      await fetch(`${import.meta.env.VITE_BACKEND}/crud/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -80,8 +78,6 @@ export default function DrawerDemo(props) {
 *Password* : ${user.password}
 *Notes* : ${user.notes || "None"}`,
       });
-
-      console.log("Image shared successfully!");
     } catch (error) {
       console.error("Error sharing image:", error);
     }
@@ -149,7 +145,7 @@ export default function DrawerDemo(props) {
                   <div className="flex items-center space-x-2">
                     <Shield className="w-4 h-4" />
                     <p className="text-sm">
-                      {getStrength()}Strong, Weak, Vulnerable
+                      {getStrength()}
                     </p>
                   </div>
 

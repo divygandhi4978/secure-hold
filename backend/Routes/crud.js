@@ -34,8 +34,6 @@ router.post("/update", async function (req, res) {
   const newJson = { ...req.body.newJson, date: Date.now() };
 
   await Data.updateOne(oldJson, { $set: { ...newJson } });
-  console.log("oldJson:", oldJson);
-  console.log("newJson:", newJson);
 
   res.send("Update Done");
 });

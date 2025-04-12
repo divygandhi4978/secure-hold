@@ -18,7 +18,7 @@ export default function Home() {
       <Body />
       <Features />
       <Subscribe />
-      {/* <AccSec/> */}
+      <AccSec/>
       <Footer />
       <div
         className=" fixed sm:right-5 sm:bottom-5 right-3 bottom-3 bg-zinc-900 rounded-md text-white w-10 h-10 flex items-center justify-center text-2xl font-extrabold"

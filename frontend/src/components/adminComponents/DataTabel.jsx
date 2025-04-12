@@ -3,11 +3,8 @@ import Drawer from "../adminComponents/Drawer";
 import { useEffect, useState } from "react";
 
 export default function TableDemo(props) {
-  
-
   const [logged, setLogged] = useState(0);
   useEffect(() => {
-    console.log("Data tabel");
     if (sessionStorage.user) {
       getPasswords();
       setLogged(1);
@@ -17,13 +14,9 @@ export default function TableDemo(props) {
   const [init_data, setInitData] = useState([]);
   const getPasswords = async () => {
     const userInfo = JSON.parse(sessionStorage.user);
-    console.log(userInfo);
 
     const id = userInfo.userId;
 
-    console.log(id);
-
-    console.log(1, "Load");
     let r = await fetch(
       `${import.meta.env.VITE_BACKEND}/crud/find-all?id=${id}`,
       {
@@ -35,7 +28,6 @@ export default function TableDemo(props) {
     );
 
     const data = await r.json();
-    console.log(data);
 
     setInitData(data);
   };
@@ -43,18 +35,11 @@ export default function TableDemo(props) {
   const { activePage } = props;
   return (
     <>
-
-      {!logged && (
-        <h1 className="text-xl p-5 font-semibold text-start">
-          Please Login and get into admin page.
-        </h1>
-      )}
-
-      { logged == 1 && (
+      {logged == 1 && (
         <Table>
           {init_data.length === 0 && (
             <p className="text-xl p-5 font-semibold text-start">
-              No data available to display. Please save passwords..!
+              No data available to display. Please save new passwords first..!
             </p>
           )}
           <TableBody>
@@ -64,13 +49,19 @@ export default function TableDemo(props) {
                 className="flex items-center justify-evenly sm:p-1"
               >
                 <TableCell className="font-medium text-start sm:min-w-[225px] min-w-[175px]">
-                  <div className="flex-col justify-between">
+                  <h6>
+                    <span class="bg-gray-300 p-1 rounded-sm mb-5 ">
+                      {element.tags ? element.tags : "Tags"}
+                    </span>
+                  </h6>
+                  <div className="flex-col justify-between mt-2">
                     <p className="text-[20px] py-1 text-zinc-700">
                       {element.site}{" "}
                     </p>
                     <p className="text-gray-500">{element.username}</p>
                   </div>
                 </TableCell>
+
                 <Drawer
                   activePage={activePage}
                   userData={element}

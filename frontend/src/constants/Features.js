@@ -14,7 +14,6 @@ const ele = [
     body: "Browse a password manager on your device or download a browser extension.",
     icon: `${image1}`,
     bgClr: "bg-gray-800",
-    // bgClr: "bg-green-100",
     bgHover: "hover:bg-gray-900",
   },
 

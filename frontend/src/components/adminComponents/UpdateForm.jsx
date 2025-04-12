@@ -24,8 +24,6 @@ export default function RegistrationForm(props) {
       notes: user.notes,
       tags: user.tags,
     });
-    console.log(formData);
-    console.log(user);
   }, []);
 
   const handleChange = (e) => {
@@ -37,17 +35,14 @@ export default function RegistrationForm(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(user, formData);
-    await fetch(`${import.meta.env.VITE_BACKEND
-    }/crud/update`, {
+    await fetch(`${import.meta.env.VITE_BACKEND}/crud/update`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ oldJson: {...user}, newJson: { ...formData } }),
+      body: JSON.stringify({ oldJson: { ...user }, newJson: { ...formData } }),
     });
 
-    console.log("updated");
     getPassword();
     setActive(1);
 

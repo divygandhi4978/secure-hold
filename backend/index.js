@@ -5,9 +5,9 @@ const crud = require("./Routes/crud");
 const Auth = require("./Routes/Auth");
 const logs = require("./Routes/logs");
 const d = require("./Connection/Conn");
-const cors = require('cors');
+const cors = require("cors");
 
-require('dotenv').config();
+require("dotenv").config();
 
 //Connecting App with db
 d();
@@ -23,6 +23,4 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+app.listen(port, () => {});

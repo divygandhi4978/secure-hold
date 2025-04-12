@@ -108,8 +108,8 @@ export function LoginForm({ className, ...props }) {
   if (checkingSession) return null;
   return (
     <>
-    {loading && <Loader className='sm:mt-28'/> }
-      { !loading && error == "wrongPass" && (
+      {loading == 1 && <Loader className="sm:mt-28" />}
+      {!loading && error == "wrongPass" && (
         <div className="mt-20">
           <Card>
             <CardHeader>

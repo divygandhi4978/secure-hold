@@ -11,7 +11,6 @@ import RegisterData from "../components/adminComponents/RegisterData";
 import { useNavigate } from "react-router-dom";
 
 export default function Admin(props) {
-  // const toggleLoading = props.toggleLoading;
   const { setNav } = props;
 
   const navigate = useNavigate();
@@ -65,7 +64,6 @@ export default function Admin(props) {
               <DataTabel
                 key="show-data"
                 activePage={activePage}
-                // toggleLoading={toggleLoading}
                 className="sm:p-16 mt-10"
               />
             </div>
@@ -74,7 +72,6 @@ export default function Admin(props) {
             <RegisterData
               activePage={activePage}
               key="new-data"
-              // toggleLoading={toggleLoading}
             />
           )}
         </div>

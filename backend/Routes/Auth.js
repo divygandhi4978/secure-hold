@@ -6,7 +6,6 @@ const cors = require("cors");
 router.use(express.json());
 router.use(cors());
 
-
 // @desc Login Details check
 router.post("/check", async function (req, res) {
   const checkData = req.body;
@@ -24,7 +23,7 @@ router.post("/check", async function (req, res) {
 // @ desc Register new user
 router.post("/register", async function (req, res) {
   const registerData = req.body;
-  
+
   let d = await Auth.find({ email: registerData.email });
   if (d.length == 1) {
     res.json([]);

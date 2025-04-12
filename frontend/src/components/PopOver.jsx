@@ -6,20 +6,34 @@ export default function PopOver() {
   return (
     <div className="bg-white rounded-lg text-[#222725]">
       <div className="p-3">
-        
-          <p className="font-semibold text-[#0c1618] text-2xl" onClick={()=>{
-            navigate('/home')
-          }}>Home</p>
+        <p
+          className="font-semibold text-[#0c1618] text-2xl"
+          onClick={() => {
+            navigate("/home");
+          }}
+        >
+          Home
+        </p>
         <hr />
-        
-          <p className="font-semibold text-[#0c1618]  text-2xl" onClick={()=>{
-            navigate('/features')
-          }}>Features</p>
+
+        <p
+          className="font-semibold text-[#0c1618]  text-2xl"
+          onClick={() => {
+            navigate("/features");
+          }}
+        >
+          Features
+        </p>
         <hr />
-          <p className="font-semibold text-[#222b2d]  text-2xl" onClick={()=>{
-            navigate('/faqs')
-          }}>FAQs</p>
-      </div> 
+        <p
+          className="font-semibold text-[#222b2d]  text-2xl"
+          onClick={() => {
+            navigate("/faqs");
+          }}
+        >
+          FAQs
+        </p>
+      </div>
     </div>
   );
 }

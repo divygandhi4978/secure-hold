@@ -1,18 +1,15 @@
 import { useState } from "react";
-// import SelectInput from "./selectInput";
 
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 
 export default function RegistrationForm(props) {
-  // const toggleLoading = props.toggleLoading;
   const { activePage } = props;
   const [formData, setFormData] = useState({
     userId: "",
@@ -24,7 +21,6 @@ export default function RegistrationForm(props) {
   });
 
   const handleChange = (e) => {
-    console.log(formData);
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -33,10 +29,7 @@ export default function RegistrationForm(props) {
     e.preventDefault();
 
     const user = JSON.parse(sessionStorage.getItem("user"));
-    console.log(user);
     setFormData({ ...formData, userId: user.userId });
-
-    console.log("Submitted Data:", formData);
 
     const mixedJson = {
       userId: user.userId,
@@ -47,7 +40,6 @@ export default function RegistrationForm(props) {
       tags: formData.tags,
     };
 
-    // toggleLoading(1)
     let r = await fetch(`${import.meta.env.VITE_BACKEND}/crud/add`, {
       method: "POST",
       headers: {
@@ -55,9 +47,6 @@ export default function RegistrationForm(props) {
       },
       body: JSON.stringify(mixedJson),
     });
-    // toggleLoading(0)
-    
-    console.log("done");
 
     activePage(0);
   };

@@ -2,13 +2,6 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { GalleryVerticalEnd, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-// import { SearchForm } from "@/components/search-form";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 import {
   Sidebar,
   SidebarContent,
@@ -17,77 +10,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { useNavigate } from "react-router-dom";
-
-// This is sample data.
-const userName = { name: "Divy Gandhi", email: "divygandhi4978@gmail.com" };
-const sessionData = "25 January 2025";
-
-const data = {
-  navMain: [], // or provide real data here
-};
-
-// const data = {
-//   navMain: [
-//     {
-//       title: "Manage Passwords",
-//       items: [
-//         {
-//           title: "All",
-//           url: "#",
-//         },
-//         {
-//           title: "Favourites",
-//           url: "#",
-//         },
-//       ],
-//     },
-//     {
-//       title: "Cards",
-//       items: [
-//         {
-//           title: "Credit Cards",
-//           url: "#",
-//         },
-//         {
-//           title: "Debit Cards",
-//           url: "#",
-//         },
-//       ],
-//     },
-//     {
-//       title: "Notes",
-//       items: [
-//         {
-//           title: "Work ",
-//           url: "#",
-//         },
-//         {
-//           title: "Personal",
-//           url: "#",
-//         },
-//       ],
-//     },
-//     {
-//       title: "ID Cards",
-//       items: [
-//         {
-//           title: "Aadhar Card",
-//           url: "#",
-//         },
-//         {
-//           title: "Pan Card",
-//           url: "#",
-//         },
-//       ],
-//     },
-//   ],
-// };
 
 export function AppSidebar({ ...props }) {
   const navigate = useNavigate();
@@ -148,62 +73,21 @@ export function AppSidebar({ ...props }) {
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
-        {/* <SearchForm /> */}
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
-            {data.navMain?.map((item, index) => (
-              <Collapsible
-                key={item.title}
-                defaultOpen={index === 1}
-                className="group/collapsible"
-              >
-                <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton>
-                      {item.title}{" "}
-                      <Plus className="ml-auto group-data-[state=open]/collapsible:hidden" />
-                      <Minus className="ml-auto group-data-[state=closed]/collapsible:hidden" />
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                  {item.items?.length ? (
-                    <CollapsibleContent>
-                      <SidebarMenuSub>
-                        {item.items.map((item) => (
-                          <SidebarMenuSubItem key={item.title}>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={item.isActive}
-                            >
-                              <a href={item.url}>{item.title}</a>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        ))}
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
-                  ) : null}
-                </SidebarMenuItem>
-              </Collapsible>
-            ))}
             <a href="#">
               <div className="flex flex-col gap-0.5 leading-none">
                 <span className="font-bold text-start mt-1 text-xl">
                   Last session
                 </span>
-                <span className="text-start mt-1 font-semibold">{log?log:'No Login history available'}</span>
+                <span className="text-start mt-1 font-semibold">
+                  {log ? log : "No Login history available"}
+                </span>
               </div>
             </a>
-            <div className="flex flex-col gap-0.5 leading-none mt-5">
-              <hr />
-              <Button className="bg-blue-900 hover:bg-blue-950">
-                {" "}
-                Give Me a chai please.!
-              </Button>
-              <hr />
-            </div>
-
-            <div className="flex flex-col gap-0.5 leading-none mt-1">
+            <div className="flex flex-col gap-0.5 leading-none mt-3">
               <hr />
               <Button
                 onClick={() => {

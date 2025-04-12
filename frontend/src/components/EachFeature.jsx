@@ -1,9 +1,8 @@
-import { circularProgressClasses } from "@mui/material";
 import React from "react";
 
 const EachFeature = (props) => {
   const { element } = props;
-  const {head,body,icon,bgClr,bgHover} = element
+  const { head, body, icon, bgClr, bgHover } = element;
 
   return (
     <div

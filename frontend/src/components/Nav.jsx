@@ -26,7 +26,7 @@ export default function Nav() {
             <div className="flex h-16 items-center justify-between">
               <div className="md:flex md:items-center md:gap-12">
                 <NavLink className="block text-teal-600" to="/home">
-                  <img src={webicon} alt="icon"/>
+                  <img src={webicon} alt="icon" />
                 </NavLink>
               </div>
 
@@ -40,8 +40,6 @@ export default function Nav() {
                       >
                         Home
                       </NavLink>
-
-                   
                     </li>
 
                     <li>

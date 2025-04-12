@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import bgImg from '../assets/images/subsBg.jpg'
+import bgImg from "../assets/images/subsBg.jpg";
 
 export default function Subscribe() {
   const submitCheck = () => {
@@ -29,23 +29,27 @@ export default function Subscribe() {
           Get exclusive updates & offers directly in your inbox.
         </p>
         <div className="mx-auto max-w-xs sm:max-w-md flex flex-col mt-5 items-center">
-          <div className="flex w-full max-w-xs sm:max-w-md">
-            <input
-              type="text"
-              className="p-3 w-full bg-[#191a1f] rounded-l-md text-white placeholder-white focus:outline-none"
-              placeholder="info@acme.com"
-            />
-            <button
-              type="button"
-              onClick={submitCheck}
-              className="p-3 bg-[#3662e3] text-white font-semibold rounded-r-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
-            >
-              Submit
-            </button>
-          </div>
+          {statusCode != 1 && (
+            <div className="flex w-full max-w-xs sm:max-w-md">
+              <input
+                type="text"
+                className="p-3 w-full bg-[#191a1f] rounded-l-md text-white placeholder-white focus:outline-none"
+                placeholder="info@acme.com"
+              />
+              <button
+                type="button"
+                onClick={submitCheck}
+                className="p-3 bg-[#3662e3] text-white font-semibold rounded-r-md border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+              >
+                Submit
+              </button>
+            </div>
+          )}
 
           {statusCode == 1 && (
-            <h4 className="text-gray-900 font-bold mt-2">{status} </h4>
+            <h4 className="text-green-800 font-bold mt-2 text-3xl">
+              {status}{" "}
+            </h4>
           )}
           {statusCode == 0 && (
             <h4 className="text-gray-900 font-bold mt-2"> {status}</h4>

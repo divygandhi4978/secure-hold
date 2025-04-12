@@ -10,6 +10,7 @@ import PageNotFound from "./pages/PageNotFound";
 import LogOut from "./pages/LogOut";
 import Admin from "./pages/Admin";
 import { useEffect, useState } from "react";
+import Accordion from "./components/Accordian";
 
 function App() {
   const [nav, setNav] = useState(1);
@@ -31,7 +32,7 @@ function App() {
           <Route path="/admin" element={<Admin setNav={setNav} t />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/faqs" element={<Body />} />
+          <Route path="/faqs" element={<Accordion />} />
           <Route path="/features" element={<Features />} />
           <Route path="/logged-Out" element={<LogOut />} />
         </Routes>

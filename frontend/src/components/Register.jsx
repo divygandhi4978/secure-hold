@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Loader from './Loader'
+import Loader from "./Loader";
 
 export default function LoginForm({ className, ...props }) {
   document.title = "SignUp Page";
@@ -22,10 +22,8 @@ export default function LoginForm({ className, ...props }) {
 
   const toggleLoading = () => {
     if (loading) {
-      console.log(loading);
       isLoading(0);
     } else {
-      console.log(loading);
       isLoading(1);
     }
   };
@@ -67,8 +65,6 @@ export default function LoginForm({ className, ...props }) {
       const response = await r.json();
       toggleLoading();
 
-      console.log(response);
-
       //Update user log if user exists
       if (response.length === 0) {
         setError("registered");
@@ -82,14 +78,8 @@ export default function LoginForm({ className, ...props }) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ userId: response.userId }),
         });
-        console.log("log updated");
 
-        //setUser session in local storage
-        console.log("session updated");
-        //Have to store obj as string
         sessionStorage.setItem("user", JSON.stringify(response));
-
-        console.log("in else");
 
         navigate("/admin");
       }
@@ -108,7 +98,7 @@ export default function LoginForm({ className, ...props }) {
 
   return (
     <>
-      {loading && <Loader className="sm:mt-28" />}
+      {loading == 1 && <Loader className="sm:mt-28" />}
 
       {!loading && error == "registered" && (
         <div className="mt-10">

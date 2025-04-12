@@ -17,7 +17,11 @@ export default function Hero2() {
 
       <div className="flex justify-center ">
         <div class="sm:w-4/5 max-sm:flex-col sm:flex mt-10 bg-[#15362f] sm:p-10 p-4 rounded-lg justify-center items-center sm:h-[160px]">
-          <img src={img} width={150} className="mx-auto max-sm:mt-4 hover:scale-105 transition-all duration-75" />
+          <img
+            src={img}
+            width={150}
+            className="mx-auto max-sm:mt-4 hover:scale-105 transition-all duration-75"
+          />
           <p class="lg:w-2/3 font-medium text-[#ced9d5] max-sm:mt-5">
             A password manager app remembers your passwords, so you don’t need
             to. It also helps you organize them, fill in login forms with a
